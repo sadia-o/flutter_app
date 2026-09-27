@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1079688736038",
-    "project_id": "baitguard-82129",
-    "storage_bucket": "baitguard-82129.firebasestorage.app"
+    "project_number": "609454017958",
+    "project_id": "bait-guard-6f470",
+    "storage_bucket": "bait-guard-6f470.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1079688736038:android:f24fe21b4dc96467c365e7",
+        "mobilesdk_app_id": "1:609454017958:android:c29495a693b7a79ec8d367",
         "android_client_info": {
           "package_name": "com.example.my_first_app"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDXjeznGcAw8RY7DnDz2pq-YK2j7sWJFuU"
+          "current_key": "AIzaSyAcfB9N69Js_7XHDv3_tmlzBcf_YRdjCzg"
         }
       ],
       "services": {

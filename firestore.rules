@@ -1,0 +1,260 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isActiveAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin'
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.status == 'active';
+    }
+
+    function verifiedEmail() {
+      return signedIn()
+        && request.auth.token.email_verified == true
+        && request.auth.token.email is string;
+    }
+
+    function validApplicantCreate() {
+      return request.auth == null
+        && request.resource.data.keys().hasOnly([
+          'fullName', 'email', 'normalizedEmail', 'company', 'phone',
+          'department', 'message', 'status', 'submittedAt', 'reviewedBy',
+          'reviewedAt', 'rejectionReason'
+        ])
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.normalizedEmail is string
+        && request.resource.data.normalizedEmail == request.resource.data.email
+        && request.resource.data.company is string
+        && request.resource.data.company.size() >= 2
+        && request.resource.data.company.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 7
+        && request.resource.data.phone.size() <= 30
+        && request.resource.data.department is string
+        && request.resource.data.department.size() <= 100
+        && request.resource.data.message is string
+        && request.resource.data.message.size() <= 500
+        && request.resource.data.status == 'pending'
+        && request.resource.data.submittedAt == request.time
+        && request.resource.data.reviewedBy == null
+        && request.resource.data.reviewedAt == null
+        && request.resource.data.rejectionReason == null;
+    }
+
+    function validAdminInvitationCreate() {
+      return isActiveAdmin()
+        && request.resource.data.keys().hasOnly([
+          'fullName', 'email', 'normalizedEmail', 'company', 'phone',
+          'department', 'message', 'status', 'submittedAt', 'reviewedBy',
+          'reviewedAt', 'rejectionReason', 'assignedRole',
+          'assignedFacilityIds', 'approvalSource', 'activatedUid', 'activatedAt'
+        ])
+        && request.resource.data.fullName is string
+        && request.resource.data.fullName.size() >= 2
+        && request.resource.data.fullName.size() <= 100
+        && request.resource.data.email is string
+        && request.resource.data.email.size() > 0
+        && request.resource.data.email.size() <= 254
+        && request.resource.data.normalizedEmail == request.resource.data.email
+        && request.resource.data.company is string
+        && request.resource.data.company.size() >= 2
+        && request.resource.data.company.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() >= 7
+        && request.resource.data.phone.size() <= 30
+        && request.resource.data.department is string
+        && request.resource.data.department.size() <= 100
+        && request.resource.data.message == ''
+        && request.resource.data.status == 'approved'
+        && request.resource.data.submittedAt == request.time
+        && request.resource.data.reviewedBy == request.auth.uid
+        && request.resource.data.reviewedAt == request.time
+        && request.resource.data.rejectionReason == null
+        && request.resource.data.assignedRole in ['technician', 'viewer']
+        && request.resource.data.assignedFacilityIds is list
+        && request.resource.data.assignedFacilityIds.size() > 0
+        && request.resource.data.assignedFacilityIds.size() <= 20
+        && request.resource.data.approvalSource == 'admin'
+        && request.resource.data.activatedUid == null
+        && request.resource.data.activatedAt == null;
+    }
+
+    function applicantFieldsUnchanged() {
+      return request.resource.data.fullName == resource.data.fullName
+        && request.resource.data.email == resource.data.email
+        && request.resource.data.normalizedEmail == resource.data.normalizedEmail
+        && request.resource.data.company == resource.data.company
+        && request.resource.data.phone == resource.data.phone
+        && request.resource.data.department == resource.data.department
+        && request.resource.data.message == resource.data.message
+        && request.resource.data.submittedAt == resource.data.submittedAt;
+    }
+
+    function validAdminReview() {
+      return isActiveAdmin()
+        && resource.data.status == 'pending'
+        && request.resource.data.status in ['approved', 'rejected']
+        && applicantFieldsUnchanged()
+        && request.resource.data.reviewedBy == request.auth.uid
+        && request.resource.data.reviewedAt == request.time
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'status', 'reviewedBy', 'reviewedAt', 'rejectionReason',
+          'assignedRole', 'assignedFacilityIds', 'approvalSource',
+          'activatedAt', 'activatedUid'
+        ])
+        && (
+          (request.resource.data.status == 'approved'
+            && request.resource.data.assignedRole in ['technician', 'viewer']
+            && request.resource.data.assignedFacilityIds is list
+            && request.resource.data.assignedFacilityIds.size() > 0
+            && request.resource.data.approvalSource == 'request'
+            && request.resource.data.rejectionReason == null
+            && request.resource.data.activatedAt == null
+            && request.resource.data.activatedUid == null)
+          ||
+          (request.resource.data.status == 'rejected'
+            && request.resource.data.rejectionReason is string
+            && request.resource.data.rejectionReason.size() <= 300
+            && !request.resource.data.keys().hasAny([
+              'assignedRole', 'assignedFacilityIds', 'approvalSource',
+              'activatedAt', 'activatedUid'
+            ]))
+        );
+    }
+
+    function matchingInvitation(requestId, uid) {
+      let invitation = getAfter(
+        /databases/$(database)/documents/accessRequests/$(requestId)
+      ).data;
+      return invitation.status == 'approved'
+        && invitation.normalizedEmail == request.auth.token.email
+        && invitation.assignedRole in ['technician', 'viewer']
+        && invitation.assignedFacilityIds is list
+        && invitation.assignedFacilityIds.size() > 0
+        && invitation.approvalSource in ['request', 'admin']
+        && invitation.activatedUid == uid
+        && invitation.activatedAt == request.time;
+    }
+
+    function validActivationProfile(uid) {
+      return verifiedEmail()
+        && request.auth.uid == uid
+        && request.resource.data.keys().hasOnly([
+          'uid', 'firstName', 'lastName', 'displayName', 'email', 'role',
+          'status', 'facilityIds', 'company', 'department', 'phone',
+          'jobTitle', 'bio', 'activationRequestId', 'createdAt', 'updatedAt'
+        ])
+        && request.resource.data.uid == uid
+        && request.resource.data.email == request.auth.token.email
+        && request.resource.data.role in ['technician', 'viewer']
+        && request.resource.data.status == 'active'
+        && request.resource.data.facilityIds is list
+        && request.resource.data.facilityIds.size() > 0
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.updatedAt == request.time
+        && matchingInvitation(request.resource.data.activationRequestId, uid)
+        && request.resource.data.displayName ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.fullName
+        && request.resource.data.role ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.assignedRole
+        && request.resource.data.facilityIds ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.assignedFacilityIds
+        && request.resource.data.company ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.company
+        && request.resource.data.department ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.department
+        && request.resource.data.phone ==
+          getAfter(/databases/$(database)/documents/accessRequests/$(request.resource.data.activationRequestId)).data.phone;
+    }
+
+    function validApplicantActivation(requestId) {
+      let profile = getAfter(
+        /databases/$(database)/documents/users/$(request.auth.uid)
+      ).data;
+      return verifiedEmail()
+        && resource.data.status == 'approved'
+        && resource.data.activatedUid == null
+        && resource.data.activatedAt == null
+        && resource.data.normalizedEmail == request.auth.token.email
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'activatedUid', 'activatedAt'
+        ])
+        && request.resource.data.activatedUid == request.auth.uid
+        && request.resource.data.activatedAt == request.time
+        && profile.activationRequestId == requestId
+        && profile.role == resource.data.assignedRole
+        && profile.facilityIds == resource.data.assignedFacilityIds;
+    }
+
+    function validAdminManagedUserUpdate(uid) {
+      return isActiveAdmin()
+        && request.auth.uid != uid
+        && resource.data.uid == uid
+        && request.resource.data.uid == resource.data.uid
+        && resource.data.role in ['technician', 'viewer']
+        && request.resource.data.role in ['technician', 'viewer']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'role', 'facilityIds', 'status', 'updatedAt'
+        ])
+        && request.resource.data.facilityIds is list
+        && request.resource.data.facilityIds.size() > 0
+        && request.resource.data.facilityIds.size() <= 20
+        && request.resource.data.status in ['active', 'disabled']
+        && request.resource.data.updatedAt == request.time;
+    }
+
+    match /users/{uid} {
+      allow read: if signedIn()
+        && (request.auth.uid == uid || isActiveAdmin());
+      allow create: if validActivationProfile(uid);
+      allow update: if (
+        signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+          'firstName', 'lastName', 'displayName', 'jobTitle',
+          'department', 'phone', 'bio', 'updatedAt'
+        ])
+        && request.resource.data.firstName is string
+        && request.resource.data.firstName.size() > 0
+        && request.resource.data.firstName.size() <= 50
+        && request.resource.data.lastName is string
+        && request.resource.data.lastName.size() <= 50
+        && request.resource.data.displayName is string
+        && request.resource.data.displayName ==
+          (request.resource.data.lastName == ''
+            ? request.resource.data.firstName
+            : request.resource.data.firstName + ' ' + request.resource.data.lastName)
+        && request.resource.data.jobTitle is string
+        && request.resource.data.jobTitle.size() <= 80
+        && request.resource.data.department is string
+        && request.resource.data.department.size() <= 80
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() <= 30
+        && request.resource.data.bio is string
+        && request.resource.data.bio.size() <= 200
+        && request.resource.data.updatedAt == request.time
+      ) || validAdminManagedUserUpdate(uid);
+      allow delete: if false;
+    }
+
+    match /accessRequests/{requestId} {
+      allow create: if validApplicantCreate() || validAdminInvitationCreate();
+      allow read: if isActiveAdmin()
+        || (verifiedEmail()
+          && resource.data.normalizedEmail == request.auth.token.email
+          && resource.data.status == 'approved'
+          && resource.data.activatedUid == null);
+      allow update: if validAdminReview()
+        || validApplicantActivation(requestId);
+      allow delete: if false;
+    }
+  }
+}

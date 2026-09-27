@@ -26,10 +26,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -53,10 +50,18 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDXjeznGcAw8RY7DnDz2pq-YK2j7sWJFuU',
-    appId: '1:1079688736038:android:f24fe21b4dc96467c365e7',
-    messagingSenderId: '1079688736038',
-    projectId: 'baitguard-82129',
-    storageBucket: 'baitguard-82129.firebasestorage.app',
+    apiKey: 'AIzaSyAcfB9N69Js_7XHDv3_tmlzBcf_YRdjCzg',
+    appId: '1:609454017958:android:c29495a693b7a79ec8d367',
+    messagingSenderId: '609454017958',
+    projectId: 'bait-guard-6f470',
+    storageBucket: 'bait-guard-6f470.firebasestorage.app',
+  );
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyBqP__anIc9-1w5TFwtYyeAh1w8ET-icy8',
+    appId: '1:609454017958:ios:eb83ff845ca96f72c8d367',
+    messagingSenderId: '609454017958',
+    projectId: 'bait-guard-6f470',
+    storageBucket: 'bait-guard-6f470.firebasestorage.app',
+    iosBundleId: 'com.example.myFirstApp',
   );
 }

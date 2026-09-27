@@ -1,0 +1,1 @@
+enum AdminAlertListPreset { all, criticalUnresolved }

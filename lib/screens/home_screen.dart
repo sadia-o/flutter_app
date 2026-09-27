@@ -46,33 +46,42 @@ class HomeScreen extends StatelessWidget {
           children: [
             Row(
               children: [
-                const Icon(Icons.shield_outlined,
-                    color: Color(0xFF21D19F), size: 14),
+                const Icon(
+                  Icons.shield_outlined,
+                  color: Color(0xFF21D19F),
+                  size: 14,
+                ),
                 const SizedBox(width: 4),
-                const Text('BAITGUARD',
-                    style: TextStyle(
-                        color: Color(0xFF21D19F),
-                        fontSize: 12,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 1)),
+                const Text(
+                  'BAITGUARD',
+                  style: TextStyle(
+                    color: Color(0xFF21D19F),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 4),
-            const Text('Good morning,',
-                style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold)),
-            const Text('Jun 17, 2026 · All facilities',
-                style: TextStyle(
-                    color: Color(0xFF7A8499), fontSize: 13)),
+            const Text(
+              'Good morning,',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const Text(
+              'Jun 17, 2026 · All facilities',
+              style: TextStyle(color: Color(0xFF7A8499), fontSize: 13),
+            ),
           ],
         ),
         GestureDetector(
-          onTap: () => Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) => const AlertsScreen()),
-          ),
+          onTap: () => Navigator.of(
+            context,
+          ).push(MaterialPageRoute(builder: (context) => const AlertsScreen())),
           child: Stack(
             children: [
               Container(
@@ -83,8 +92,11 @@ class HomeScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(21),
                   border: Border.all(color: const Color(0xFF252840)),
                 ),
-                child: const Icon(Icons.notifications_outlined,
-                    color: Color(0xFF9CA3AF), size: 20),
+                child: const Icon(
+                  Icons.notifications_outlined,
+                  color: Color(0xFF9CA3AF),
+                  size: 20,
+                ),
               ),
               Positioned(
                 right: 0,
@@ -97,11 +109,14 @@ class HomeScreen extends StatelessWidget {
                     shape: BoxShape.circle,
                   ),
                   child: const Center(
-                    child: Text('3',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                            fontWeight: FontWeight.bold)),
+                    child: Text(
+                      '3',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 10,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
                   ),
                 ),
               ),
@@ -136,20 +151,25 @@ class HomeScreen extends StatelessWidget {
                     strokeWidth: 7,
                     backgroundColor: const Color(0xFF1E2433),
                     valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFF21D19F)),
+                      Color(0xFF21D19F),
+                    ),
                   ),
                 ),
                 const Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text('87',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold)),
-                    Text('Health',
-                        style: TextStyle(
-                            color: Color(0xFF7A8499), fontSize: 9)),
+                    Text(
+                      '87',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      'Health',
+                      style: TextStyle(color: Color(0xFF7A8499), fontSize: 9),
+                    ),
                   ],
                 ),
               ],
@@ -161,21 +181,37 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    _kpiCard('Total', '120', Colors.white,
-                        Icons.location_on_outlined),
+                    _kpiCard(
+                      'Total',
+                      '120',
+                      Colors.white,
+                      Icons.location_on_outlined,
+                    ),
                     const SizedBox(width: 8),
-                    _kpiCard('Active', '118', const Color(0xFF21D19F),
-                        Icons.bolt_outlined),
+                    _kpiCard(
+                      'Active',
+                      '118',
+                      const Color(0xFF21D19F),
+                      Icons.bolt_outlined,
+                    ),
                   ],
                 ),
                 const SizedBox(height: 8),
                 Row(
                   children: [
-                    _kpiCard('Refills', '8', const Color(0xFFF59E0B),
-                        Icons.water_drop_outlined),
+                    _kpiCard(
+                      'Refills',
+                      '8',
+                      const Color(0xFFF59E0B),
+                      Icons.water_drop_outlined,
+                    ),
                     const SizedBox(width: 8),
-                    _kpiCard('Offline', '2', const Color(0xFFEF4444),
-                        Icons.wifi_off_outlined),
+                    _kpiCard(
+                      'Offline',
+                      '2',
+                      const Color(0xFFEF4444),
+                      Icons.wifi_off_outlined,
+                    ),
                   ],
                 ),
               ],
@@ -186,12 +222,10 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _kpiCard(String label, String value,
-      Color valueColor, IconData icon) {
+  Widget _kpiCard(String label, String value, Color valueColor, IconData icon) {
     return Expanded(
       child: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: 10, vertical: 8),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
         decoration: BoxDecoration(
           color: const Color(0xFF1A1D2E),
           borderRadius: BorderRadius.circular(10),
@@ -203,17 +237,24 @@ class HomeScreen extends StatelessWidget {
               children: [
                 Icon(icon, color: valueColor, size: 12),
                 const SizedBox(width: 4),
-                Text(label,
-                    style: const TextStyle(
-                        color: Color(0xFF7A8499), fontSize: 10)),
+                Text(
+                  label,
+                  style: const TextStyle(
+                    color: Color(0xFF7A8499),
+                    fontSize: 10,
+                  ),
+                ),
               ],
             ),
             const SizedBox(height: 2),
-            Text(value,
-                style: TextStyle(
-                    color: valueColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold)),
+            Text(
+              value,
+              style: TextStyle(
+                color: valueColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
       ),
@@ -233,7 +274,7 @@ class HomeScreen extends StatelessWidget {
               duration: Duration(seconds: 2),
             ),
           );
-        }
+        },
       },
       {
         'icon': Icons.map_outlined,
@@ -243,12 +284,11 @@ class HomeScreen extends StatelessWidget {
             context: context,
             backgroundColor: const Color(0xFF11151F),
             shape: const RoundedRectangleBorder(
-              borderRadius:
-                  BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
             ),
             builder: (context) => _buildFullMapSheet(),
           );
-        }
+        },
       },
       {
         'icon': Icons.description_outlined,
@@ -259,18 +299,23 @@ class HomeScreen extends StatelessWidget {
             builder: (context) => AlertDialog(
               backgroundColor: const Color(0xFF11151F),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16)),
-              title: const Text('Generate Report',
-                  style: TextStyle(color: Colors.white)),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              title: const Text(
+                'Generate Report',
+                style: TextStyle(color: Colors.white),
+              ),
               content: const Text(
-                  'Export a PDF report of all station activity?',
-                  style: TextStyle(color: Color(0xFF9CA3AF))),
+                'Export a PDF report of all station activity?',
+                style: TextStyle(color: Color(0xFF9CA3AF)),
+              ),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: const Text('Cancel',
-                      style: TextStyle(
-                          color: Color(0xFF7A8499))),
+                  child: const Text(
+                    'Cancel',
+                    style: TextStyle(color: Color(0xFF7A8499)),
+                  ),
                 ),
                 TextButton(
                   onPressed: () {
@@ -282,14 +327,15 @@ class HomeScreen extends StatelessWidget {
                       ),
                     );
                   },
-                  child: const Text('Export PDF',
-                      style: TextStyle(
-                          color: Color(0xFF21D19F))),
+                  child: const Text(
+                    'Export PDF',
+                    style: TextStyle(color: Color(0xFF21D19F)),
+                  ),
                 ),
               ],
             ),
           );
-        }
+        },
       },
       {
         'icon': Icons.settings_outlined,
@@ -297,10 +343,9 @@ class HomeScreen extends StatelessWidget {
         'onTap': () {
           Navigator.push(
             context,
-            MaterialPageRoute(
-                builder: (context) => const SettingsScreen()),
+            MaterialPageRoute(builder: (context) => const SettingsScreen()),
           );
-        }
+        },
       },
     ];
 
@@ -319,12 +364,19 @@ class HomeScreen extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  Icon(a['icon'] as IconData,
-                      color: const Color(0xFF21D19F), size: 22),
+                  Icon(
+                    a['icon'] as IconData,
+                    color: const Color(0xFF21D19F),
+                    size: 22,
+                  ),
                   const SizedBox(height: 6),
-                  Text(a['label'] as String,
-                      style: const TextStyle(
-                          color: Color(0xFF9CA3AF), fontSize: 11)),
+                  Text(
+                    a['label'] as String,
+                    style: const TextStyle(
+                      color: Color(0xFF9CA3AF),
+                      fontSize: 11,
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -344,14 +396,18 @@ class HomeScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: const [
-              Text('Live facility map',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
-              Text('120 stations',
-                  style: TextStyle(
-                      color: Color(0xFF7A8499), fontSize: 13)),
+              Text(
+                'Live facility map',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              Text(
+                '120 stations',
+                style: TextStyle(color: Color(0xFF7A8499), fontSize: 13),
+              ),
             ],
           ),
           const SizedBox(height: 12),
@@ -365,26 +421,29 @@ class HomeScreen extends StatelessWidget {
               child: Stack(
                 children: [
                   const Positioned(
-                      bottom: 8,
-                      left: 30,
-                      child: Text('ZONE A',
-                          style: TextStyle(
-                              color: Color(0xFF374151),
-                              fontSize: 11))),
+                    bottom: 8,
+                    left: 30,
+                    child: Text(
+                      'ZONE A',
+                      style: TextStyle(color: Color(0xFF374151), fontSize: 11),
+                    ),
+                  ),
                   const Positioned(
-                      bottom: 8,
-                      left: 140,
-                      child: Text('ZONE B',
-                          style: TextStyle(
-                              color: Color(0xFF374151),
-                              fontSize: 11))),
+                    bottom: 8,
+                    left: 140,
+                    child: Text(
+                      'ZONE B',
+                      style: TextStyle(color: Color(0xFF374151), fontSize: 11),
+                    ),
+                  ),
                   const Positioned(
-                      bottom: 8,
-                      right: 30,
-                      child: Text('ZONE C',
-                          style: TextStyle(
-                              color: Color(0xFF374151),
-                              fontSize: 11))),
+                    bottom: 8,
+                    right: 30,
+                    child: Text(
+                      'ZONE C',
+                      style: TextStyle(color: Color(0xFF374151), fontSize: 11),
+                    ),
+                  ),
                   _stationPin('01', const Color(0xFF21D19F), 40, 60),
                   _stationPin('07', const Color(0xFFEF4444), 130, 100),
                   _stationPin('03', const Color(0xFFF59E0B), 220, 50),
@@ -400,8 +459,7 @@ class HomeScreen extends StatelessWidget {
                       children: [
                         _legendItem('Active', const Color(0xFF21D19F)),
                         _legendItem('Alert', const Color(0xFFEF4444)),
-                        _legendItem(
-                            'Low bait', const Color(0xFFF59E0B)),
+                        _legendItem('Low bait', const Color(0xFFF59E0B)),
                         _legendItem('Offline', const Color(0xFF6B7280)),
                       ],
                     ),
@@ -438,14 +496,18 @@ class HomeScreen extends StatelessWidget {
         ),
         child: Column(
           children: [
-            Text(value,
-                style: TextStyle(
-                    color: color,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold)),
-            Text(label,
-                style: const TextStyle(
-                    color: Color(0xFF7A8499), fontSize: 9)),
+            Text(
+              value,
+              style: TextStyle(
+                color: color,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Text(
+              label,
+              style: const TextStyle(color: Color(0xFF7A8499), fontSize: 9),
+            ),
           ],
         ),
       ),
@@ -463,11 +525,14 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Live facility map',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600)),
+          const Text(
+            'Live facility map',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 12),
           Container(
             height: 160,
@@ -479,23 +544,29 @@ class HomeScreen extends StatelessWidget {
             child: Stack(
               children: [
                 const Positioned(
-                    bottom: 8,
-                    left: 8,
-                    child: Text('ZONE A',
-                        style: TextStyle(
-                            color: Color(0xFF374151), fontSize: 10))),
+                  bottom: 8,
+                  left: 8,
+                  child: Text(
+                    'ZONE A',
+                    style: TextStyle(color: Color(0xFF374151), fontSize: 10),
+                  ),
+                ),
                 const Positioned(
-                    bottom: 8,
-                    left: 120,
-                    child: Text('ZONE B',
-                        style: TextStyle(
-                            color: Color(0xFF374151), fontSize: 10))),
+                  bottom: 8,
+                  left: 120,
+                  child: Text(
+                    'ZONE B',
+                    style: TextStyle(color: Color(0xFF374151), fontSize: 10),
+                  ),
+                ),
                 const Positioned(
-                    bottom: 8,
-                    right: 20,
-                    child: Text('ZONE C',
-                        style: TextStyle(
-                            color: Color(0xFF374151), fontSize: 10))),
+                  bottom: 8,
+                  right: 20,
+                  child: Text(
+                    'ZONE C',
+                    style: TextStyle(color: Color(0xFF374151), fontSize: 10),
+                  ),
+                ),
                 _stationPin('01', const Color(0xFF21D19F), 30, 40),
                 _stationPin('07', const Color(0xFFEF4444), 100, 70),
                 _stationPin('03', const Color(0xFFF59E0B), 190, 30),
@@ -524,8 +595,7 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _stationPin(
-      String label, Color color, double left, double top) {
+  Widget _stationPin(String label, Color color, double left, double top) {
     final bool isActive = color == const Color(0xFF21D19F);
     return Positioned(
       left: left,
@@ -535,14 +605,16 @@ class HomeScreen extends StatelessWidget {
           : Container(
               width: 28,
               height: 28,
-              decoration:
-                  BoxDecoration(color: color, shape: BoxShape.circle),
+              decoration: BoxDecoration(color: color, shape: BoxShape.circle),
               child: Center(
-                child: Text(label,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold)),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
     );
@@ -554,14 +626,15 @@ class HomeScreen extends StatelessWidget {
       child: Row(
         children: [
           Container(
-              width: 6,
-              height: 6,
-              decoration: BoxDecoration(
-                  color: color, shape: BoxShape.circle)),
+            width: 6,
+            height: 6,
+            decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+          ),
           const SizedBox(width: 4),
-          Text(label,
-              style: const TextStyle(
-                  color: Color(0xFF9CA3AF), fontSize: 9)),
+          Text(
+            label,
+            style: const TextStyle(color: Color(0xFF9CA3AF), fontSize: 9),
+          ),
         ],
       ),
     );
@@ -581,50 +654,55 @@ class HomeScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Activity — last 24 hrs',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600)),
+              const Text(
+                'Activity — last 24 hrs',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: const [
-                  Text('42',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.bold)),
-                  Text('detections today',
-                      style: TextStyle(
-                          color: Color(0xFF7A8499), fontSize: 10)),
+                  Text(
+                    '42',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    'detections today',
+                    style: TextStyle(color: Color(0xFF7A8499), fontSize: 10),
+                  ),
                 ],
               ),
             ],
           ),
           const SizedBox(height: 4),
-          const Text('↗ +23% vs yesterday',
-              style: TextStyle(
-                  color: Color(0xFF21D19F), fontSize: 11)),
+          const Text(
+            '↗ +23% vs yesterday',
+            style: TextStyle(color: Color(0xFF21D19F), fontSize: 11),
+          ),
           const SizedBox(height: 12),
           const _InteractiveChart(),
           const SizedBox(height: 6),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              '0h',
-              '3h',
-              '6h',
-              '9h',
-              '12h',
-              '15h',
-              '18h',
-              '21h',
-              '24h'
-            ]
-                .map((t) => Text(t,
-                    style: const TextStyle(
-                        color: Color(0xFF4B5563), fontSize: 9)))
-                .toList(),
+            children:
+                ['0h', '3h', '6h', '9h', '12h', '15h', '18h', '21h', '24h']
+                    .map(
+                      (t) => Text(
+                        t,
+                        style: const TextStyle(
+                          color: Color(0xFF4B5563),
+                          fontSize: 9,
+                        ),
+                      ),
+                    )
+                    .toList(),
           ),
         ],
       ),
@@ -642,11 +720,14 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Species breakdown',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600)),
+          const Text(
+            'Species breakdown',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
           const SizedBox(height: 14),
           Row(
             children: [
@@ -663,23 +744,29 @@ class HomeScreen extends StatelessWidget {
                         value: 0.58,
                         strokeWidth: 8,
                         backgroundColor: const Color(0xFFF59E0B),
-                        valueColor:
-                            const AlwaysStoppedAnimation<Color>(
-                                Color(0xFFEF4444)),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                          Color(0xFFEF4444),
+                        ),
                       ),
                     ),
                     const Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text('87',
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold)),
-                        Text('total',
-                            style: TextStyle(
-                                color: Color(0xFF7A8499),
-                                fontSize: 9)),
+                        Text(
+                          '87',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          'total',
+                          style: TextStyle(
+                            color: Color(0xFF7A8499),
+                            fontSize: 9,
+                          ),
+                        ),
                       ],
                     ),
                   ],
@@ -691,8 +778,7 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     _speciesRow('Rat', '58%', const Color(0xFFEF4444)),
                     const SizedBox(height: 10),
-                    _speciesRow(
-                        'Mouse', '29%', const Color(0xFFF59E0B)),
+                    _speciesRow('Mouse', '29%', const Color(0xFFF59E0B)),
                     const SizedBox(height: 10),
                     _speciesRow('Other', '13%', const Color(0xFF6B7280)),
                   ],
@@ -709,20 +795,25 @@ class HomeScreen extends StatelessWidget {
     return Row(
       children: [
         Container(
-            width: 8,
-            height: 8,
-            decoration:
-                BoxDecoration(color: color, shape: BoxShape.circle)),
+          width: 8,
+          height: 8,
+          decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+        ),
         const SizedBox(width: 8),
         Expanded(
-            child: Text(name,
-                style: const TextStyle(
-                    color: Color(0xFFD1D5DB), fontSize: 13))),
-        Text(pct,
-            style: TextStyle(
-                color: color,
-                fontSize: 13,
-                fontWeight: FontWeight.w600)),
+          child: Text(
+            name,
+            style: const TextStyle(color: Color(0xFFD1D5DB), fontSize: 13),
+          ),
+        ),
+        Text(
+          pct,
+          style: TextStyle(
+            color: color,
+            fontSize: 13,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ],
     );
   }
@@ -734,28 +825,28 @@ class HomeScreen extends StatelessWidget {
         'sub': 'RB-07 · Warehouse B · 2:13 AM',
         'status': 'Unresolved',
         'color': 0xFFEF4444,
-        'dot': 0xFFEF4444
+        'dot': 0xFFEF4444,
       },
       {
         'title': 'Low bait (18%)',
         'sub': 'RB-03 · Cold storage · 11:45 AM',
         'status': 'Pending',
         'color': 0xFFF59E0B,
-        'dot': 0xFFF59E0B
+        'dot': 0xFFF59E0B,
       },
       {
         'title': 'Tamper detected',
         'sub': 'RB-12 · Main entrance · Yesterday',
         'status': 'Unresolved',
         'color': 0xFFEF4444,
-        'dot': 0xFFEF4444
+        'dot': 0xFFEF4444,
       },
       {
         'title': 'Station offline',
         'sub': 'RB-09 · Parking lot · 2 days ago',
         'status': 'Investigating',
         'color': 0xFF6B7280,
-        'dot': 0xFF6B7280
+        'dot': 0xFF6B7280,
       },
     ];
 
@@ -772,100 +863,123 @@ class HomeScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Recent alerts',
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600)),
+              const Text(
+                'Recent alerts',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               GestureDetector(
                 onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                      builder: (context) => const AlertsScreen()),
+                  MaterialPageRoute(builder: (context) => const AlertsScreen()),
                 ),
-                child: const Text('View all →',
-                    style: TextStyle(
-                        color: Color(0xFF3B9CFF), fontSize: 13)),
+                child: const Text(
+                  'View all →',
+                  style: TextStyle(color: Color(0xFF3B9CFF), fontSize: 13),
+                ),
               ),
             ],
           ),
           const SizedBox(height: 12),
-          ...alerts.map((a) => GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AlertDetailScreen(
-                        title: a['title'] as String,
-                        subtitle: a['sub'] as String,
-                        status: a['status'] as String,
+          ...alerts.map(
+            (a) => GestureDetector(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => AlertDetailScreen(
+                      title: a['title'] as String,
+                      subtitle: a['sub'] as String,
+                      status: a['status'] as String,
+                      color: Color(a['color'] as int),
+                      icon: Icons.warning_amber_rounded,
+                    ),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 12),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 36,
+                      height: 36,
+                      decoration: BoxDecoration(
+                        color: Color(
+                          (a['color'] as int),
+                        ).withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Icon(
+                        Icons.warning_amber_rounded,
                         color: Color(a['color'] as int),
-                        icon: Icons.warning_amber_rounded,
+                        size: 18,
                       ),
                     ),
-                  );
-                },
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 12),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: 36,
-                        height: 36,
-                        decoration: BoxDecoration(
-                          color: Color((a['color'] as int))
-                              .withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        child: Icon(Icons.warning_amber_rounded,
-                            color: Color(a['color'] as int), size: 18),
-                      ),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              children: [
-                                Container(
-                                    width: 6,
-                                    height: 6,
-                                    decoration: BoxDecoration(
-                                        color: Color(a['dot'] as int),
-                                        shape: BoxShape.circle)),
-                                const SizedBox(width: 6),
-                                Text(a['title'] as String,
-                                    style: const TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 13,
-                                        fontWeight: FontWeight.w500)),
-                              ],
-                            ),
-                            const SizedBox(height: 2),
-                            Text(a['sub'] as String,
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Row(
+                            children: [
+                              Container(
+                                width: 6,
+                                height: 6,
+                                decoration: BoxDecoration(
+                                  color: Color(a['dot'] as int),
+                                  shape: BoxShape.circle,
+                                ),
+                              ),
+                              const SizedBox(width: 6),
+                              Text(
+                                a['title'] as String,
                                 style: const TextStyle(
-                                    color: Color(0xFF7A8499),
-                                    fontSize: 11)),
-                          ],
+                                  color: Colors.white,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
+                          ),
+                          const SizedBox(height: 2),
+                          Text(
+                            a['sub'] as String,
+                            style: const TextStyle(
+                              color: Color(0xFF7A8499),
+                              fontSize: 11,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 8,
+                        vertical: 3,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Color(
+                          (a['color'] as int),
+                        ).withValues(alpha: 0.15),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        a['status'] as String,
+                        style: TextStyle(
+                          color: Color(a['color'] as int),
+                          fontSize: 10,
+                          fontWeight: FontWeight.w500,
                         ),
                       ),
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 8, vertical: 3),
-                        decoration: BoxDecoration(
-                          color: Color((a['color'] as int))
-                              .withValues(alpha: 0.15),
-                          borderRadius: BorderRadius.circular(20),
-                        ),
-                        child: Text(a['status'] as String,
-                            style: TextStyle(
-                                color: Color(a['color'] as int),
-                                fontSize: 10,
-                                fontWeight: FontWeight.w500)),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
-              )),
+              ),
+            ),
+          ),
         ],
       ),
     );
@@ -883,14 +997,18 @@ class _InteractiveChart extends StatefulWidget {
 class _InteractiveChartState extends State<_InteractiveChart> {
   double? _touchX;
   int? _touchIndex;
-  final List<double> _points = [
-    0.1, 0.15, 0.5, 0.8, 0.6, 0.55, 0.65, 0.4, 0.3
-  ];
-  final List<String> _values = [
-    '1', '2', '6', '10', '8', '7', '8', '5', '4'
-  ];
+  final List<double> _points = [0.1, 0.15, 0.5, 0.8, 0.6, 0.55, 0.65, 0.4, 0.3];
+  final List<String> _values = ['1', '2', '6', '10', '8', '7', '8', '5', '4'];
   final List<String> _times = [
-    '0h', '3h', '6h', '9h', '12h', '15h', '18h', '21h', '24h'
+    '0h',
+    '3h',
+    '6h',
+    '9h',
+    '12h',
+    '15h',
+    '18h',
+    '21h',
+    '24h',
   ];
 
   @override
@@ -898,15 +1016,12 @@ class _InteractiveChartState extends State<_InteractiveChart> {
     return SizedBox(
       height: 80,
       child: GestureDetector(
-        onTapDown: (d) =>
-            _onTouch(d.localPosition.dx, context),
-        onPanUpdate: (d) =>
-            _onTouch(d.localPosition.dx, context),
-        onPanEnd: (_) =>
-            setState(() {
-              _touchX = null;
-              _touchIndex = null;
-            }),
+        onTapDown: (d) => _onTouch(d.localPosition.dx, context),
+        onPanUpdate: (d) => _onTouch(d.localPosition.dx, context),
+        onPanEnd: (_) => setState(() {
+          _touchX = null;
+          _touchIndex = null;
+        }),
         child: Stack(
           children: [
             CustomPaint(
@@ -919,7 +1034,9 @@ class _InteractiveChartState extends State<_InteractiveChart> {
                 top: 0,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 8, vertical: 4),
+                    horizontal: 8,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
                     color: const Color(0xFF3B9CFF),
                     borderRadius: BorderRadius.circular(6),
@@ -927,9 +1044,10 @@ class _InteractiveChartState extends State<_InteractiveChart> {
                   child: Text(
                     '${_values[_touchIndex!]} detections\n${_times[_touchIndex!]}',
                     style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontWeight: FontWeight.w500),
+                      color: Colors.white,
+                      fontSize: 9,
+                      fontWeight: FontWeight.w500,
+                    ),
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -942,10 +1060,10 @@ class _InteractiveChartState extends State<_InteractiveChart> {
 
   void _onTouch(double dx, BuildContext context) {
     final width = context.size?.width ?? 300;
-    final index =
-        ((dx / width) * (_points.length - 1))
-            .round()
-            .clamp(0, _points.length - 1);
+    final index = ((dx / width) * (_points.length - 1)).round().clamp(
+      0,
+      _points.length - 1,
+    );
     setState(() {
       _touchX = dx.clamp(24, width - 24);
       _touchIndex = index;
@@ -966,9 +1084,7 @@ class SimpleLinePainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.round;
 
-    final points = [
-      0.1, 0.15, 0.5, 0.8, 0.6, 0.55, 0.65, 0.4, 0.3
-    ];
+    final points = [0.1, 0.15, 0.5, 0.8, 0.6, 0.55, 0.65, 0.4, 0.3];
     final path = Path();
 
     for (int i = 0; i < points.length; i++) {
@@ -990,8 +1106,7 @@ class SimpleLinePainter extends CustomPainter {
           const Color(0xFF3B9CFF).withValues(alpha: 0.2),
           const Color(0xFF3B9CFF).withValues(alpha: 0.0),
         ],
-      ).createShader(
-          Rect.fromLTWH(0, 0, size.width, size.height))
+      ).createShader(Rect.fromLTWH(0, 0, size.width, size.height))
       ..style = PaintingStyle.fill;
 
     final fillPath = Path.from(path)
@@ -1010,19 +1125,18 @@ class SimpleLinePainter extends CustomPainter {
         linePaint,
       );
       final ratio = touchX! / size.width;
-      final idx = (ratio * (points.length - 1))
-          .round()
-          .clamp(0, points.length - 1);
+      final idx = (ratio * (points.length - 1)).round().clamp(
+        0,
+        points.length - 1,
+      );
       final dotY = size.height - (points[idx] * size.height);
-      final dotPaint = Paint()
-        ..color = const Color(0xFF3B9CFF);
+      final dotPaint = Paint()..color = const Color(0xFF3B9CFF);
       canvas.drawCircle(Offset(touchX!, dotY), 4, dotPaint);
     }
   }
 
   @override
-  bool shouldRepaint(covariant SimpleLinePainter old) =>
-      old.touchX != touchX;
+  bool shouldRepaint(covariant SimpleLinePainter old) => old.touchX != touchX;
 }
 
 // Glowing pin widget
@@ -1047,10 +1161,10 @@ class _GlowingPinState extends State<_GlowingPin>
       vsync: this,
       duration: const Duration(seconds: 2),
     )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 0.3, end: 1.0).animate(
-      CurvedAnimation(
-          parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 0.3,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -1072,8 +1186,7 @@ class _GlowingPinState extends State<_GlowingPin>
               height: 44,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: widget.color
-                    .withValues(alpha: _animation.value * 0.25),
+                color: widget.color.withValues(alpha: _animation.value * 0.25),
               ),
             ),
             Container(
@@ -1081,8 +1194,7 @@ class _GlowingPinState extends State<_GlowingPin>
               height: 36,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
-                color: widget.color
-                    .withValues(alpha: _animation.value * 0.4),
+                color: widget.color.withValues(alpha: _animation.value * 0.4),
               ),
             ),
             Container(
@@ -1093,19 +1205,23 @@ class _GlowingPinState extends State<_GlowingPin>
                 shape: BoxShape.circle,
                 boxShadow: [
                   BoxShadow(
-                    color: widget.color
-                        .withValues(alpha: _animation.value * 0.8),
+                    color: widget.color.withValues(
+                      alpha: _animation.value * 0.8,
+                    ),
                     blurRadius: 8,
                     spreadRadius: 2,
                   ),
                 ],
               ),
               child: Center(
-                child: Text(widget.label,
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 9,
-                        fontWeight: FontWeight.bold)),
+                child: Text(
+                  widget.label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 9,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
           ],
